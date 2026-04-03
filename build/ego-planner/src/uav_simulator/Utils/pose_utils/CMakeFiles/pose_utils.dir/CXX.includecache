@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kkcqh/WTF/ackermann_ego_planner/src/ego-planner/src/uav_simulator/Utils/pose_utils/include/pose_utils.h
+iostream
+-
+armadillo
+/home/kkcqh/WTF/ackermann_ego_planner/src/ego-planner/src/uav_simulator/Utils/pose_utils/include/armadillo
+
+/home/kkcqh/WTF/ackermann_ego_planner/src/ego-planner/src/uav_simulator/Utils/pose_utils/src/pose_utils.cpp
+pose_utils.h
+/home/kkcqh/WTF/ackermann_ego_planner/src/ego-planner/src/uav_simulator/Utils/pose_utils/src/pose_utils.h
+

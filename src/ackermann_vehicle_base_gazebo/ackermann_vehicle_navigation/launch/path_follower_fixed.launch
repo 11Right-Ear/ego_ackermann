@@ -1,0 +1,28 @@
+<launch>
+  <!-- TF 和里程计发布 -->
+  <node pkg="ackermann_vehicle_navigation" type="tf_odom_publisher.py" name="tf_publisher" output="screen">
+    <param name="vehicle_name" value="ackermann_vehicle" />
+    <param name="global_frame_id" value="odom" />
+  </node>
+  
+  <!-- 静态 TF 变换 -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_broadcaster" 
+        args="0 0 0 0 0 0 1 ackermann_vehicle base_link" />
+  
+  <!-- 路径跟随器 - 订阅规划路径并发布速度指令 -->
+  <node pkg="ackermann_vehicle_navigation" type="path_follower.py" name="path_follower" output="screen">
+    <!-- 可以在这里添加参数来配置订阅的话题名称 -->
+  </node>
+  
+  <!-- 速度转换 - 将 Twist 转换为阿克曼转向指令 -->
+  <node pkg="ackermann_vehicle_navigation" type="cmd_vel_to_ackermann_drive.py" name="cmd_vel_converter" output="screen">
+    <param name="twist_cmd_topic" value="/cmd_vel" />
+    <param name="ackermann_cmd_topic" value="/ackermann_cmd" />
+    <param name="wheelbase" value="1.0" />
+    <param name="frame_id" value="odom" />
+    <param name="message_type" value="ackermann_drive" />
+  </node>
+  
+  <!-- 话题桥接（可选）- 如果 EGO-Planner 发布的话题不是 /path -->
+  <!-- 需要根据实际情况启用 -->
+</launch>
